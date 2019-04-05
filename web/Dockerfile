@@ -7,8 +7,8 @@ CMD ./watch.sh
 
 # Building stems from dev
 FROM dev-stage as build-stage
-COPY build-step.sh ./
-RUN ./build-step.sh
+COPY build.sh ./
+RUN ./build.sh
 
 
 FROM nginx:1.15 as prod-stage
