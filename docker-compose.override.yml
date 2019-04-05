@@ -1,0 +1,9 @@
+version: '3.5'
+services:
+
+  web:
+    build:
+      target: build-stage
+      args:
+        ENV: dev
+    command: echo "DEV COMMAND..."
