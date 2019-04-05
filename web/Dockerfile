@@ -1,14 +1,16 @@
-FROM node:8 as build-stage
-WORKDIR /app
-
+# For dev setups
+FROM nginx:1.15 as dev-stage
 ARG ENV=prod
 ENV ENV=${ENV}
+WORKDIR /app
+CMD ./watch.sh
 
+# Building stems from dev
+FROM dev-stage as build-stage
 COPY build-step.sh ./
 RUN ./build-step.sh
 
-FROM node:8
-WORKDIR /app
-COPY --from=build-stage /app/build.txt /app/
-CMD cat build.txt
 
+FROM nginx:1.15 as prod-stage
+WORKDIR /usr/share/nginx/html
+COPY --from=build-stage /app/dist/ /usr/share/nginx/html

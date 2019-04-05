@@ -5,3 +5,5 @@ services:
     image: web:${GIT_HASH:-latest}
     build:
       context: ./web
+    ports:
+      - 0.0.0.0:80:80

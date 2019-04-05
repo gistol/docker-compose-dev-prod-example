@@ -3,7 +3,8 @@ services:
 
   web:
     build:
-      target: build-stage
+      target: dev-stage
       args:
         ENV: dev
-    command: echo "DEV COMMAND..."
+    volumes:
+      - ./web:/app

@@ -3,7 +3,8 @@
 set -e
 
 PROJECT_NAME=build-test-prod
-ENV=prod
-GIT_HASH=$(git rev-parse HEAD)
+
+export ENV=prod
+export GIT_HASH=$(git rev-parse HEAD || echo "prod-latest")
 
 docker-compose -p ${PROJECT_NAME} -f docker-compose.yml "$@"
